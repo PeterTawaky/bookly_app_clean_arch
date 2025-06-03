@@ -5,3 +5,6 @@ abstract class HomeUseCase<Type, Param> {
   //generics
   Future<Either<ApiErrorModel, Type>> execute([Param param]); //optional param
 }
+
+class NoParam {}
+
