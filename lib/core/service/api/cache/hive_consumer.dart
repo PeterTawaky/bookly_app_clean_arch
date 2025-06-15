@@ -9,4 +9,9 @@ class HiveConsumer {
     var box = Hive.box(boxName);
     box.addAll(data);
   }
+
+  static List<T> getData<T>(String boxName) {
+    var box = Hive.box<T>(boxName).values; //iterable collection
+    return box.toList();
+  }
 }
