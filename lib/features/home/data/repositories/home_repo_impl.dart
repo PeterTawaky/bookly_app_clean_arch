@@ -16,12 +16,13 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<ApiErrorModel, List<BookEntity>>> fetchFeaturedBooks() async {
     try {
-      var localBooks = homeLocalDataSource.fetchFeaturedBooks();
-      if (localBooks.isNotEmpty) {
-        return Right(localBooks); //this means we have cached data
+      List<BookEntity> books;
+      books = homeLocalDataSource.fetchNewstBooks();
+      if (books.isNotEmpty) {
+        return Right(books); //this means we have cached data
       }
-      var remoteBooks = await homeRemoteDataSource.fetchFeaturedBooks();
-      return Right(remoteBooks);
+      books = await homeRemoteDataSource.fetchNewstBooks();
+      return Right(books);
     } catch (e) {
       return Left(ApiErrorHandler.handle(e));
     }
@@ -30,12 +31,13 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<ApiErrorModel, List<BookEntity>>> fetchNewstBooks() async {
     try {
-      var localBooks = homeLocalDataSource.fetchNewstBooks();
-      if (localBooks.isNotEmpty) {
-        return Right(localBooks); //this means we have cached data
+      List<BookEntity> books;
+      books = homeLocalDataSource.fetchNewstBooks();
+      if (books.isNotEmpty) {
+        return Right(books); //this means we have cached data
       }
-      var remoteBooks = await homeRemoteDataSource.fetchNewstBooks();
-      return Right(remoteBooks);
+      books = await homeRemoteDataSource.fetchNewstBooks();
+      return Right(books);
     } catch (e) {
       return Left(ApiErrorHandler.handle(e));
     }
